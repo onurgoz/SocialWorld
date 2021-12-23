@@ -8,7 +8,7 @@ using SocialWorld.Entities.Concrete;
 
 namespace SocialWorld.DataAccess.Concrete.EntityFrameworkCore.Repositories
 {
-    public class EfSocialResposibiltiyType : EfGenericRepository<SocialResponsibilityType>, ISocialResponsibilityTypeDal
+    public class EfSocialResponsibilityTypeRepository : EfGenericRepository<SocialResponsibilityType>, ISocialResponsibilityTypeDal
     {
     }
 }

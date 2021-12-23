@@ -26,7 +26,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles ="Admin,Member")]
+        [Authorize(Roles = "Admin,Member,Company,City")]
         public async Task<IActionResult> GetAllJobTypes()
         {
             return Ok(await _jobTypeService.GetAllAsync());

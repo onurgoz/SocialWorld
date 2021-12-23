@@ -26,7 +26,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Member")]
+        [Authorize(Roles = "Admin,Member,Company,City")]
         [ValidModel]
         public async Task<IActionResult> GetAllJobsAsync()
         {
@@ -34,7 +34,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles ="Member")]
+        [Authorize(Roles = "Admin,Member,Company,City")]
         [ValidModel]
         public async Task<IActionResult> GetJobById(int id)
         {
@@ -42,7 +42,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        [Authorize(Roles ="Admin,Member")]
+        [Authorize(Roles = "Admin,Member,Company,City")]
         [ValidModel]
         public async Task<IActionResult> GetJobsByCompanyId(int id)
         {
@@ -50,7 +50,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Member")]
+        [Authorize(Roles = "Admin,Company,City")]
         [ValidModel]
         public async Task<IActionResult> AddAsync(JobAddDto jobAddDto)
         {
@@ -59,7 +59,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles ="Member")]
+        [Authorize(Roles = "Admin,Company,City")]
         [ValidModel]
         public async Task<IActionResult> EditAsync(int id,JobEditDto jobEditDto)
         {
@@ -84,7 +84,7 @@ namespace SocialWorld.WebApi.Controllers
 
 
         [HttpDelete("{id}")]
-        [Authorize(Roles ="Member")]
+        [Authorize(Roles = "Admin,Company,City")]
         public async Task<IActionResult> DeleteJob(int id)
         {
             var job = await _jobService.FindByIdAsync(id);

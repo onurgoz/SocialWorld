@@ -13,6 +13,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using SocialWorld.Business.DTOs.SocialResponsibilityDtos;
 
 namespace SocialWorld.Business.Containers.MicrosoftIoC
 {
@@ -45,6 +46,14 @@ namespace SocialWorld.Business.Containers.MicrosoftIoC
             services.AddScoped<IJobTypeDal, EfJobTypeRepository>();
             services.AddScoped<IJobTypeService, JobTypeManager>();
 
+
+            services.AddScoped<ISocialResponsibilityDal, EfSocialResponsibilityRepository>();
+            services.AddScoped<ISocialResponsibilityService, SocialResponsibilityManager>();
+
+
+            services.AddScoped<ISocialResponsibilityTypeDal, EfSocialResponsibilityTypeRepository>();
+            services.AddScoped<ISocialResponsibilityTypeService, SocialResponsibilityTypeManager>();
+
             services.AddScoped<IJwtService, JwtManager>();
 
             services.AddTransient<IValidator<AppUserLoginDto>, AppUserLoginDtoValidator>();
@@ -53,6 +62,8 @@ namespace SocialWorld.Business.Containers.MicrosoftIoC
             services.AddTransient<IValidator<CompanyEditDto>, CompanyEditDtoValidator>();
             services.AddTransient<IValidator<JobAddDto>, JobAddDtoValidator>();
             services.AddTransient<IValidator<JobEditDto>, JobEditDtoValidator>();
+            services.AddTransient<IValidator<SocialResponsibilityAddDto>, SocialResponsibilityAddDtoValidator>();
+            services.AddTransient<IValidator<SocialResponsibilityEditDto>, SocialResponsibilityEditDtoValidator>();
         }
     }
 }

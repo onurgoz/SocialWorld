@@ -26,21 +26,21 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        [Authorize(Roles = "Admin,Member")]
+        [Authorize(Roles = "Admin,Member,Company,City")]
         public async Task<IActionResult> GetCompanies(int id)
         {
             return Ok(_mapper.Map<List<CompanyEditDto>>(await _companyService.GetByAppUserIdAsync(id)));
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin,Member")]
+        [Authorize(Roles = "Admin,Member,Company,City")]
         public async Task<IActionResult> GetById(int id)
         {
             return Ok(_mapper.Map<CompanyEditDto>(await _companyService.FindByIdAsync(id)));
         }
 
         [HttpPost]
-        [Authorize(Roles ="Member")]
+        [Authorize(Roles = "Admin,Company")]
         [ValidModel]
         public async Task<IActionResult> AddCompany(CompanyAddDto companyAddDto)
         {
@@ -49,7 +49,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles ="Member")]
+        [Authorize(Roles = "Admin,Company")]
         [ValidModel]
         public async Task<IActionResult> EditCompany(int id,CompanyEditDto companyEditDto)
         {
@@ -80,7 +80,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpDelete("{id}")]
-        [Authorize(Roles ="Admin,Member")]
+        [Authorize(Roles = "Admin,Company")]
         [ValidModel]
         public async Task<IActionResult> DeleteCompany(int id)
         {

@@ -75,7 +75,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet("[action]")]
-        [Authorize(Roles ="Admin,Member")]
+        [Authorize(Roles ="Admin")]
         public async Task<IActionResult> GetActiveUser()
         {
             var user = await _appUserService.FindByEmail(User.Identity.Name);
