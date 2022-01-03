@@ -1,14 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SocialWorld.Business.DTOs.CompanyDtos;
 using SocialWorld.Business.Interfaces;
 using SocialWorld.Entities.Concrete;
 using SocialWorld.WebApi.CustomFilters;
-using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialWorld.WebApi.Controllers
@@ -75,7 +72,7 @@ namespace SocialWorld.WebApi.Controllers
             }
             else
             {
-                return NotFound("Girilen id'ye ait herhangi bir şirket bulunmamaktadır.");
+                return NotFound("Girilen id'ye ait herhangi bir değer bulunmamaktadır.");
             }
         }
 

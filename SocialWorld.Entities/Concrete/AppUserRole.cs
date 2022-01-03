@@ -1,11 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-using SocialWorld.Entities.Abstract;
+﻿using SocialWorld.Entities.Abstract;
 
 namespace SocialWorld.Entities.Concrete
 {
-    public class AppUserRole : Entity
+    public class AppUserRole : IEntity
     {
         public int Id { get; set; }
 

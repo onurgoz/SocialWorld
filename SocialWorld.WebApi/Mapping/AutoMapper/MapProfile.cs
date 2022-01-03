@@ -4,11 +4,6 @@ using SocialWorld.Business.DTOs.AppUserDtos;
 using SocialWorld.Business.DTOs.CompanyDtos;
 using SocialWorld.Business.DTOs.JobDtos;
 using SocialWorld.Entities.Concrete;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using SocialWorld.Business.DTOs.SocialResponsibilityDtos;
 
 namespace SocialWorld.WebApi.Mapping.AutoMapper
 {
@@ -43,18 +38,6 @@ namespace SocialWorld.WebApi.Mapping.AutoMapper
             CreateMap<JobEditDto, Job>();
             #endregion
 
-            #region SocialResponsibility
-
-            CreateMap<SocialResponsibility, SocialResponsibilityAddDto>();
-            CreateMap<SocialResponsibilityAddDto, SocialResponsibility>();
-
-            CreateMap<SocialResponsibility, SocialResponsibilityListDto>();
-            CreateMap<SocialResponsibilityListDto, SocialResponsibility>();
-
-            CreateMap<SocialResponsibility, SocialResponsibilityEditDto>();
-            CreateMap<SocialResponsibilityEditDto, SocialResponsibility>();
-
-            #endregion
 
             #region Applicant
             CreateMap<Applicant, ApplicantListDto>();

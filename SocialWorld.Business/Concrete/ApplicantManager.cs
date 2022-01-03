@@ -1,10 +1,7 @@
 ﻿using SocialWorld.Business.Interfaces;
 using SocialWorld.DataAccess.Interfaces;
 using SocialWorld.Entities.Concrete;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace SocialWorld.Business.Concrete
@@ -21,6 +18,7 @@ namespace SocialWorld.Business.Concrete
         public async Task<List<Applicant>> GetAllApplicantsByJobId(int id)
         {
             return await _genericDal.GetAllByFilter(I => I.JobId == id);
+            
         }
 
         public async Task<List<Applicant>> GetUserApplications(int id)

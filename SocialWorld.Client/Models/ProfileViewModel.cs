@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace SocialWorld.Client.Models
+﻿namespace SocialWorld.Client.Models
 {
     public class ProfileViewModel
     {

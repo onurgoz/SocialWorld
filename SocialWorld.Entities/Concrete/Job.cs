@@ -1,11 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 using SocialWorld.Entities.Abstract;
 
 namespace SocialWorld.Entities.Concrete
 {
-    public class Job : Entity
+    public class Job : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }

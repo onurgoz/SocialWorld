@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace SocialWorld.Business.DTOs.CompanyDtos
+﻿namespace SocialWorld.Business.DTOs.CompanyDtos
 {
     public class CompanyEditDto
     {

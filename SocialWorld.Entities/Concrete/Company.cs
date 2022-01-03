@@ -1,11 +1,9 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 using SocialWorld.Entities.Abstract;
 
 namespace SocialWorld.Entities.Concrete
 {
-    public class Company : Entity
+    public class Company : IEntity
     {
         public int Id { get; set; }
         public string Name { get; set; }
@@ -22,7 +20,7 @@ namespace SocialWorld.Entities.Concrete
         public AppUser AppUser { get; set; }
         public List<Job> Jobs { get; set; }
 
-        public List<SocialResponsibility> SocialResponsibilities { get; set; }
+        
 
     }
 }

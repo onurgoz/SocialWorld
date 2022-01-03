@@ -1,11 +1,9 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using SocialWorld.Entities.Abstract;
 
 namespace SocialWorld.Entities.Concrete
 {
-    public class Applicant : Entity
+    public class Applicant : IEntity
     {
         public int Id { get; set; }
         public DateTime ApplicationDate { get; set; } = DateTime.Now;
@@ -16,7 +14,7 @@ namespace SocialWorld.Entities.Concrete
         public int JobId { get; set; }
         public Job Job { get; set; }
 
-        public SocialResponsibility SocialResponsibility { get; set; } 
+       
 
 
 

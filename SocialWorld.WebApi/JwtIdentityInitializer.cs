@@ -1,8 +1,5 @@
 ﻿using SocialWorld.Business.Interfaces;
 using SocialWorld.Business.StringInfo;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace SocialWorld.WebApi

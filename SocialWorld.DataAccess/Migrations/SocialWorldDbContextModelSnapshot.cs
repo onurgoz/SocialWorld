@@ -222,66 +222,6 @@ namespace SocialWorld.DataAccess.Migrations
                     b.ToTable("JobTypes");
                 });
 
-            modelBuilder.Entity("SocialWorld.Entities.Concrete.SocialResponsibility", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<DateTime>("AddedTime")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CompanyId")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Explanation")
-                        .IsRequired()
-                        .HasMaxLength(300)
-                        .HasColumnType("nvarchar(300)");
-
-                    b.Property<int>("JobTypeId")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("LastEdit")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("PhotoString")
-                        .HasMaxLength(500)
-                        .HasColumnType("nvarchar(500)");
-
-                    b.Property<bool>("isActive")
-                        .HasColumnType("bit");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("CompanyId");
-
-                    b.HasIndex("JobTypeId");
-
-                    b.ToTable("SocialResponsibilities");
-                });
-
-            modelBuilder.Entity("SocialWorld.Entities.Concrete.SocialResposibiltiyType", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .UseIdentityColumn();
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("SocialResposibiltiyTypes");
-                });
-
             modelBuilder.Entity("SocialWorld.Entities.Concrete.AppUserRole", b =>
                 {
                     b.HasOne("SocialWorld.Entities.Concrete.AppRole", "AppRole")
@@ -309,12 +249,6 @@ namespace SocialWorld.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
 
-                    b.HasOne("SocialWorld.Entities.Concrete.SocialResponsibility", "SocialResponsibility")
-                        .WithMany("Applicants")
-                        .HasForeignKey("JobId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.HasOne("SocialWorld.Entities.Concrete.AppUser", "AppUser")
                         .WithMany("Applicants")
                         .HasForeignKey("UserId")
@@ -324,8 +258,6 @@ namespace SocialWorld.DataAccess.Migrations
                     b.Navigation("AppUser");
 
                     b.Navigation("Job");
-
-                    b.Navigation("SocialResponsibility");
                 });
 
             modelBuilder.Entity("SocialWorld.Entities.Concrete.Company", b =>
@@ -357,25 +289,6 @@ namespace SocialWorld.DataAccess.Migrations
                     b.Navigation("JobType");
                 });
 
-            modelBuilder.Entity("SocialWorld.Entities.Concrete.SocialResponsibility", b =>
-                {
-                    b.HasOne("SocialWorld.Entities.Concrete.Company", "Company")
-                        .WithMany("SocialResponsibilities")
-                        .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.HasOne("SocialWorld.Entities.Concrete.SocialResposibiltiyType", "SocialResposibiltiyType")
-                        .WithMany("SocialResponsibilities")
-                        .HasForeignKey("JobTypeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
-                    b.Navigation("Company");
-
-                    b.Navigation("SocialResposibiltiyType");
-                });
-
             modelBuilder.Entity("SocialWorld.Entities.Concrete.AppRole", b =>
                 {
                     b.Navigation("AppUserRoles");
@@ -393,8 +306,6 @@ namespace SocialWorld.DataAccess.Migrations
             modelBuilder.Entity("SocialWorld.Entities.Concrete.Company", b =>
                 {
                     b.Navigation("Jobs");
-
-                    b.Navigation("SocialResponsibilities");
                 });
 
             modelBuilder.Entity("SocialWorld.Entities.Concrete.Job", b =>
@@ -405,16 +316,6 @@ namespace SocialWorld.DataAccess.Migrations
             modelBuilder.Entity("SocialWorld.Entities.Concrete.JobType", b =>
                 {
                     b.Navigation("Jobs");
-                });
-
-            modelBuilder.Entity("SocialWorld.Entities.Concrete.SocialResponsibility", b =>
-                {
-                    b.Navigation("Applicants");
-                });
-
-            modelBuilder.Entity("SocialWorld.Entities.Concrete.SocialResposibiltiyType", b =>
-                {
-                    b.Navigation("SocialResponsibilities");
                 });
 #pragma warning restore 612, 618
         }
