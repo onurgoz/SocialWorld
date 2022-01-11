@@ -24,7 +24,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Member,Company,City")]
+        [Authorize(Roles = "Admin,Member")]
         [ValidModel]
         public async Task<IActionResult> GetAllJobsAsync()
         {
@@ -32,7 +32,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet("{id}")]
-        [Authorize(Roles = "Admin,Member,Company,City")]
+        [Authorize(Roles = "Admin,Member")]
         [ValidModel]
         public async Task<IActionResult> GetJobById(int id)
         {
@@ -40,7 +40,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        [Authorize(Roles = "Admin,Member,Company,City")]
+        [Authorize(Roles = "Admin,Member")]
         [ValidModel]
         public async Task<IActionResult> GetJobsByCompanyId(int id)
         {
@@ -48,7 +48,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin,Company,City")]
+        [Authorize(Roles = "Admin,Member")]
         [ValidModel]
         public async Task<IActionResult> AddAsync(JobAddDto jobAddDto)
         {
@@ -57,7 +57,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpPut("{id}")]
-        [Authorize(Roles = "Admin,Company,City")]
+        [Authorize(Roles = "Admin,Member")]
         [ValidModel]
         public async Task<IActionResult> EditAsync(int id,JobEditDto jobEditDto)
         {
@@ -73,7 +73,7 @@ namespace SocialWorld.WebApi.Controllers
                 job.LastEdit = DateTime.Now;
                 job.PhotoString = jobEditDto.PhotoString;
                 job.Explanation = jobEditDto.Explanation;
-
+                job.JobTypeId = jobEditDto.JobTypeId;
                 await _jobService.UpdateAsync(job);
                 return Ok();
             }
@@ -82,7 +82,7 @@ namespace SocialWorld.WebApi.Controllers
 
 
         [HttpDelete("{id}")]
-        [Authorize(Roles = "Admin,Company,City")]
+        [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> DeleteJob(int id)
         {
             var job = await _jobService.FindByIdAsync(id);

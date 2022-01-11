@@ -23,14 +23,14 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet("[action]/{id}")]
-        [Authorize(Roles = "Admin,Member,Company,City")]
+        [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> GetAllApplicantsByJobId(int id)
         {
             return Ok(_mapper.Map<List<ApplicantListDto>>(await _applicantService.GetAllApplicantsByJobId(id)));
         }
 
         [HttpPost]
-        [Authorize(Roles = "Admin,Member,Company,City")]
+        [Authorize(Roles = "Admin,Member")]
         [ValidModel]
         public async Task<IActionResult> ApplyJob(AddApplicantDto addApplicantDto)
         {
@@ -42,7 +42,7 @@ namespace SocialWorld.WebApi.Controllers
         
 
         [HttpGet("[action]/{id}")]
-        [Authorize(Roles = "Admin,Member,Company,City")]
+        [Authorize(Roles = "Admin,Member")]
         [ValidModel]
         public async Task<IActionResult> GetUserApplicants(int id)
         {

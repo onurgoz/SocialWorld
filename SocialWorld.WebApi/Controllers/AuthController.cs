@@ -1,4 +1,5 @@
-﻿using AutoMapper;
+﻿using System.Collections.Generic;
+using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using SocialWorld.Business.DTOs.AppUserDtos;
@@ -36,6 +37,7 @@ namespace SocialWorld.WebApi.Controllers
                 var roles = await _appUserService.GetRolesByEmail(appUserLoginDto.Email);
                 var token = _jwtService.GenerateJwt(user, roles);
 
+                
                 return Created("", token);
             }
             else
@@ -43,6 +45,21 @@ namespace SocialWorld.WebApi.Controllers
                 return BadRequest("Kullanıcı adı veya şifre yanlış");
             }
         }
+
+        [HttpGet("[action]")]
+        [ValidModel]
+        public async Task<IActionResult> GetRoles(string Email)
+        {
+            var user = await _appUserService.FindByEmail((Email));
+            if (user != null)
+            {
+                List<AppRole> roles = await _appUserService.GetRolesByEmail(Email);
+                return Ok(roles);
+            }
+
+            return BadRequest();
+        }
+
 
         [HttpPost("[action]")]
         [ValidModel]
@@ -72,7 +89,7 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet("[action]")]
-        [Authorize(Roles ="Admin,Member")]
+        [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> GetActiveUser()
         {
             var user = await _appUserService.FindByEmail(User.Identity.Name);

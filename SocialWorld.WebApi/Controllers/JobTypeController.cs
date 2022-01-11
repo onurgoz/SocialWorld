@@ -22,19 +22,57 @@ namespace SocialWorld.WebApi.Controllers
         }
 
         [HttpGet]
-        [Authorize(Roles = "Admin,Member,Company,City")]
+        [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> GetAllJobTypes()
         {
             return Ok(await _jobTypeService.GetAllAsync());
         }
 
-        [HttpPost]
+        [HttpGet("{action}/{id}")]
+        [Authorize(Roles = "Admin,Member")]
+        public async Task<IActionResult> GetByIdJobType(int id)
+        {
+            var jobType = await _jobTypeService.FindByIdAsync(id);
+            if (jobType != null)
+            {
+
+                
+                return Ok(jobType);
+            }
+            return BadRequest("Id doğru değil");
+        }
+
+
+        [HttpPost("{action}")]
         [Authorize(Roles ="Admin")]
         [ValidModel]
         public async Task<IActionResult> AddJobType(AddJobTypeDto addJobTypeDto)
         {
             await _jobTypeService.AddAsync(_mapper.Map<JobType>(addJobTypeDto));
             return Created("", addJobTypeDto);
+        }
+        [HttpPut]
+        [Authorize(Roles = "Admin")]
+        [ValidModel]
+        public async Task<IActionResult> UpdateJobType(UpdateJobTypeDto updateJobTypeDto)
+        {
+            await _jobTypeService.UpdateAsync(_mapper.Map<JobType>(updateJobTypeDto));
+            return Created("", updateJobTypeDto);
+        }
+
+        [HttpDelete("{action}/{id}")]
+        [Authorize(Roles = "Admin,Member")]
+        [ValidModel]
+        public async Task<IActionResult> DeleteCompany(int id)
+        {
+            var jobType = await _jobTypeService.FindByIdAsync(id);
+            if (jobType != null)
+            {
+                
+                await _jobTypeService.UpdateAsync(jobType);
+                return NoContent();
+            }
+            return BadRequest("Id doğru değil");
         }
     }
 }

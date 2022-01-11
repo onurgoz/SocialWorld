@@ -1,4 +1,6 @@
-﻿namespace SocialWorld.Business.DTOs.JobDtos
+﻿using System.Runtime.InteropServices.ComTypes;
+
+namespace SocialWorld.Business.DTOs.JobDtos
 {
     public class JobEditDto 
     {
@@ -6,5 +8,6 @@
         public string Name { get; set; }
         public string Explanation { get; set; }
         public string PhotoString { get; set; }
+        public int JobTypeId { get; set; }
     }
 }

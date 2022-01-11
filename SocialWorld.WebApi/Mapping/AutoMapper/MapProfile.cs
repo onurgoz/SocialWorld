@@ -3,6 +3,7 @@ using SocialWorld.Business.DTOs.ApplicantDtos;
 using SocialWorld.Business.DTOs.AppUserDtos;
 using SocialWorld.Business.DTOs.CompanyDtos;
 using SocialWorld.Business.DTOs.JobDtos;
+using SocialWorld.Business.DTOs.JobTypeDtos;
 using SocialWorld.Entities.Concrete;
 
 namespace SocialWorld.WebApi.Mapping.AutoMapper
@@ -38,6 +39,14 @@ namespace SocialWorld.WebApi.Mapping.AutoMapper
             CreateMap<JobEditDto, Job>();
             #endregion
 
+            #region JobType
+
+            CreateMap<JobType, AddJobTypeDto>();
+            CreateMap<AddJobTypeDto,JobType>();
+            CreateMap<JobType, UpdateJobTypeDto>();
+            CreateMap<UpdateJobTypeDto,JobType>();
+
+            #endregion
 
             #region Applicant
             CreateMap<Applicant, ApplicantListDto>();
