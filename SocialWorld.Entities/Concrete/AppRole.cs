@@ -7,8 +7,6 @@ namespace SocialWorld.Entities.Concrete
     {
         public int Id { get; set; }
         public string Name { get; set; }
-
         public List<AppUserRole> AppUserRoles { get; set; }
-
     }
 }

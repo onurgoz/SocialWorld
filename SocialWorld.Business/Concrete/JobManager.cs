@@ -16,12 +16,18 @@ namespace SocialWorld.Business.Concrete
 
         public async Task<List<Job>> GetAllActiveJobsAsync()
         {
-            return await _genericDal.GetAllByFilter(I => I.isActive == true && I.Company.isActive==true);
+            return await _genericDal.GetAllByFilter(I => I.IsActive == true && I.Company.IsActive==true);
         }
 
         public async Task<List<Job>> GetAllJobsByCompanyId(int id)
         {
-            return await _genericDal.GetAllByFilter(I => I.isActive == true && I.CompanyId==id);
+            return await _genericDal.GetAllByFilter(I => I.IsActive == true && I.CompanyId==id);
         }
+
+        public async Task<List<Job>> GetAllJobsByJobTypeId(int id)
+        {
+            return await _genericDal.GetAllByFilter(I => I.IsActive == true && I.JobTypeId == id);
+        }
+
     }
 }

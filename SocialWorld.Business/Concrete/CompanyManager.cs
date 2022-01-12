@@ -16,7 +16,7 @@ namespace SocialWorld.Business.Concrete
 
         public async Task<List<Company>> GetByAppUserIdAsync(int appUserId)
         {
-            return await _genericDal.GetAllByFilter(I => I.AppUserId == appUserId && I.isActive==true);
+            return await _genericDal.GetAllByFilter(I => I.AppUserId == appUserId && I.IsActive==true);
         }
     }
 }

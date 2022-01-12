@@ -3,7 +3,7 @@ using Microsoft.EntityFrameworkCore.Migrations;
 
 namespace SocialWorld.DataAccess.Migrations
 {
-    public partial class InitialCreate : Migration
+    public partial class addappuseridinjobs : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {
@@ -78,9 +78,13 @@ namespace SocialWorld.DataAccess.Migrations
                 {
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    Name = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
                     Address = table.Column<string>(type: "nvarchar(300)", maxLength: 300, nullable: false),
-                    isActive = table.Column<bool>(type: "bit", nullable: false),
+                    Explanation = table.Column<string>(type: "nvarchar(max)", maxLength: 2147483647, nullable: false),
+                    Email = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
+                    PhoneNumber = table.Column<string>(type: "nvarchar(13)", maxLength: 13, nullable: false),
+                    PhotoString = table.Column<string>(type: "nvarchar(max)", maxLength: 2147483647, nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     AppUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
@@ -101,18 +105,30 @@ namespace SocialWorld.DataAccess.Migrations
                     Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     Name = table.Column<string>(type: "nvarchar(100)", maxLength: 100, nullable: false),
-                    isActive = table.Column<bool>(type: "bit", nullable: false),
+                    AddedTime = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    LastEdit = table.Column<DateTime>(type: "datetime2", nullable: false),
+                    Explanation = table.Column<string>(type: "nvarchar(max)", maxLength: 2147483647, nullable: false),
+                    PhotoString = table.Column<string>(type: "nvarchar(max)", maxLength: 2147483647, nullable: true),
+                    IsActive = table.Column<bool>(type: "bit", nullable: false),
                     JobTypeId = table.Column<int>(type: "int", nullable: false),
-                    CompanyId = table.Column<int>(type: "int", nullable: false)
+                    CompanyId = table.Column<int>(type: "int", nullable: false),
+                    AppUserId = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Jobs", x => x.Id);
                     table.ForeignKey(
+                        name: "FK_Jobs_AppUsers_AppUserId",
+                        column: x => x.AppUserId,
+                        principalTable: "AppUsers",
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
+                    table.ForeignKey(
                         name: "FK_Jobs_Companies_CompanyId",
                         column: x => x.CompanyId,
                         principalTable: "Companies",
-                        principalColumn: "Id");
+                        principalColumn: "Id",
+                        onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Jobs_JobTypes_JobTypeId",
                         column: x => x.JobTypeId,
@@ -176,6 +192,11 @@ namespace SocialWorld.DataAccess.Migrations
             migrationBuilder.CreateIndex(
                 name: "IX_Companies_AppUserId",
                 table: "Companies",
+                column: "AppUserId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Jobs_AppUserId",
+                table: "Jobs",
                 column: "AppUserId");
 
             migrationBuilder.CreateIndex(

@@ -35,13 +35,10 @@ namespace SocialWorld.WebApi.Controllers
             var jobType = await _jobTypeService.FindByIdAsync(id);
             if (jobType != null)
             {
-
-                
                 return Ok(jobType);
             }
             return BadRequest("Id doğru değil");
         }
-
 
         [HttpPost("{action}")]
         [Authorize(Roles ="Admin")]
@@ -68,7 +65,6 @@ namespace SocialWorld.WebApi.Controllers
             var jobType = await _jobTypeService.FindByIdAsync(id);
             if (jobType != null)
             {
-                
                 await _jobTypeService.UpdateAsync(jobType);
                 return NoContent();
             }

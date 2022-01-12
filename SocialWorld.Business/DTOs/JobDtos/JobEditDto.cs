@@ -2,7 +2,7 @@
 
 namespace SocialWorld.Business.DTOs.JobDtos
 {
-    public class JobEditDto 
+    public class JobEditDto
     {
         public int Id { get; set; }
         public string Name { get; set; }

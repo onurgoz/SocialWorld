@@ -8,5 +8,6 @@
         public string PhotoString { get; set; }
         public int JobTypeId { get; set; }
         public int CompanyId { get; set; }
+        public int AppUserId { get; set; }
     }
 }

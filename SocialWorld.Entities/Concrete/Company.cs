@@ -12,15 +12,9 @@ namespace SocialWorld.Entities.Concrete
         public string Email { get; set; }
         public string PhoneNumber { get; set; }
         public string PhotoString { get; set; }
-
-
-        public bool isActive { get; set; } = true;
-
+        public bool IsActive { get; set; } = true;
         public int AppUserId { get; set; }
         public AppUser AppUser { get; set; }
         public List<Job> Jobs { get; set; }
-
-        
-
     }
 }

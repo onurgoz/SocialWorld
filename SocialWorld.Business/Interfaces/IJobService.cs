@@ -8,5 +8,6 @@ namespace SocialWorld.Business.Interfaces
     {
         Task<List<Job>> GetAllActiveJobsAsync();
         Task<List<Job>> GetAllJobsByCompanyId(int id);
+        public Task<List<Job>> GetAllJobsByJobTypeId(int id);
     }
 }

@@ -65,7 +65,6 @@ namespace SocialWorld.WebApi.Controllers
             {
                 return BadRequest("Invalid Id");
             }
-
             var job = await _jobService.FindByIdAsync(jobEditDto.Id);
             if (job!=null)
             {
@@ -80,7 +79,6 @@ namespace SocialWorld.WebApi.Controllers
             return NotFound("Bu id'ye ait iş bulunmamaktadır.");
         }
 
-
         [HttpDelete("{id}")]
         [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> DeleteJob(int id)
@@ -89,12 +87,11 @@ namespace SocialWorld.WebApi.Controllers
 
             if (job!=null)
             {
-                job.isActive = false;
+                job.IsActive = false;
                 await _jobService.UpdateAsync(job);
                 return NoContent();
             }
             return NotFound("Girilen Id'ye ait bir değer yoktur.");
         }
-
     }
 }

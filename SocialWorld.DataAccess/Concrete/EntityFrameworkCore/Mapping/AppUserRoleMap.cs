@@ -10,7 +10,6 @@ namespace SocialWorld.DataAccess.Concrete.EntityFrameworkCore.Mapping
         {
             builder.Property(I => I.Id);
             builder.Property(I => I.Id).UseIdentityColumn();
-
             builder.HasIndex(I => new { I.AppUserId, I.AppRoleId }).IsUnique();
         }
     }

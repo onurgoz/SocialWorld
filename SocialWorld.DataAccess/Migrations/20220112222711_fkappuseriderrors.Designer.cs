@@ -10,8 +10,8 @@ using SocialWorld.DataAccess.Concrete.EntityFrameworkCore.Context;
 namespace SocialWorld.DataAccess.Migrations
 {
     [DbContext(typeof(SocialWorldDbContext))]
-    [Migration("20210119214527_InitialCreate")]
-    partial class InitialCreate
+    [Migration("20220112222711_fkappuseriderrors")]
+    partial class fkappuseriderrors
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -130,13 +130,32 @@ namespace SocialWorld.DataAccess.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
-                    b.Property<string>("Name")
+                    b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<bool>("isActive")
+                    b.Property<string>("Explanation")
+                        .IsRequired()
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
                         .HasColumnType("bit");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(300)
+                        .HasColumnType("nvarchar(300)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasMaxLength(13)
+                        .HasColumnType("nvarchar(13)");
+
+                    b.Property<string>("PhotoString")
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
@@ -152,21 +171,41 @@ namespace SocialWorld.DataAccess.Migrations
                         .HasColumnType("int")
                         .UseIdentityColumn();
 
+                    b.Property<DateTime>("AddedTime")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("AppUserId")
+                        .HasColumnType("int");
+
                     b.Property<int>("CompanyId")
                         .HasColumnType("int");
 
+                    b.Property<string>("Explanation")
+                        .IsRequired()
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsActive")
+                        .HasColumnType("bit");
+
                     b.Property<int>("JobTypeId")
                         .HasColumnType("int");
+
+                    b.Property<DateTime>("LastEdit")
+                        .HasColumnType("datetime2");
 
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(100)
                         .HasColumnType("nvarchar(100)");
 
-                    b.Property<bool>("isActive")
-                        .HasColumnType("bit");
+                    b.Property<string>("PhotoString")
+                        .HasMaxLength(2147483647)
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("AppUserId");
 
                     b.HasIndex("CompanyId");
 
@@ -240,10 +279,15 @@ namespace SocialWorld.DataAccess.Migrations
 
             modelBuilder.Entity("SocialWorld.Entities.Concrete.Job", b =>
                 {
+                    b.HasOne("SocialWorld.Entities.Concrete.AppUser", "AppUser")
+                        .WithMany("Jobs")
+                        .HasForeignKey("AppUserId")
+                        .IsRequired();
+
                     b.HasOne("SocialWorld.Entities.Concrete.Company", "Company")
                         .WithMany("Jobs")
                         .HasForeignKey("CompanyId")
-                        .OnDelete(DeleteBehavior.NoAction)
+                        .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("SocialWorld.Entities.Concrete.JobType", "JobType")
@@ -251,6 +295,8 @@ namespace SocialWorld.DataAccess.Migrations
                         .HasForeignKey("JobTypeId")
                         .OnDelete(DeleteBehavior.NoAction)
                         .IsRequired();
+
+                    b.Navigation("AppUser");
 
                     b.Navigation("Company");
 
@@ -269,6 +315,8 @@ namespace SocialWorld.DataAccess.Migrations
                     b.Navigation("AppUserRoles");
 
                     b.Navigation("Companies");
+
+                    b.Navigation("Jobs");
                 });
 
             modelBuilder.Entity("SocialWorld.Entities.Concrete.Company", b =>

@@ -13,10 +13,5 @@ namespace SocialWorld.Entities.Concrete
 
         public int JobId { get; set; }
         public Job Job { get; set; }
-
-       
-
-
-
     }
 }

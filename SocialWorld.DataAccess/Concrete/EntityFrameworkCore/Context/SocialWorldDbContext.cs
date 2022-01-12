@@ -9,7 +9,6 @@ namespace SocialWorld.DataAccess.Concrete.EntityFrameworkCore.Context
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
 	        optionsBuilder.UseSqlServer("Server=DESKTOP-2BJFEU7; Database=SocialWorld;uid=sa;pwd=1234;");
-            
         }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -30,8 +29,5 @@ namespace SocialWorld.DataAccess.Concrete.EntityFrameworkCore.Context
         public DbSet<Company> Companies { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<JobType> JobTypes { get; set; }
-        
-
-
     }
 }

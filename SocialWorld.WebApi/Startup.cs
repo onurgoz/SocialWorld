@@ -44,10 +44,7 @@ namespace SocialWorld.WebApi
                     ClockSkew = TimeSpan.Zero
                 };
             });
-            services.AddControllers().AddNewtonsoftJson(opt =>
-            {
-                opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore;
-            }).AddFluentValidation();
+            services.AddControllers().AddNewtonsoftJson(opt => opt.SerializerSettings.ReferenceLoopHandling = ReferenceLoopHandling.Ignore).AddFluentValidation();
 
             services.AddCors();
         }
@@ -59,26 +56,17 @@ namespace SocialWorld.WebApi
             {
                 app.UseDeveloperExceptionPage();
             }
-
             JwtIdentityInitializer.Seed(appUserService, appUserRoleService, appRoleService).Wait();
-
             app.UseRouting();
             app.UseStaticFiles();
-
             app.UseCors(x => x
             .AllowAnyOrigin()
             .AllowAnyHeader()
             .AllowAnyMethod()
             );
-
             app.UseAuthentication();
             app.UseAuthorization();
-
-            
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
+            app.UseEndpoints(endpoints => endpoints.MapControllers());
         }
     }
 }

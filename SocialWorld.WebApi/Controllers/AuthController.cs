@@ -31,13 +31,10 @@ namespace SocialWorld.WebApi.Controllers
         public async Task<IActionResult> SignIn(AppUserLoginDto appUserLoginDto)
         {
             var user = await _appUserService.FindByEmail(appUserLoginDto.Email);
-
             if (user != null && BCrypt.Net.BCrypt.Verify(appUserLoginDto.Password, user.Password))
             {
                 var roles = await _appUserService.GetRolesByEmail(appUserLoginDto.Email);
                 var token = _jwtService.GenerateJwt(user, roles);
-
-                
                 return Created("", token);
             }
             else
@@ -50,41 +47,33 @@ namespace SocialWorld.WebApi.Controllers
         [ValidModel]
         public async Task<IActionResult> GetRoles(string Email)
         {
-            var user = await _appUserService.FindByEmail((Email));
+            var user = await _appUserService.FindByEmail(Email);
             if (user != null)
             {
                 List<AppRole> roles = await _appUserService.GetRolesByEmail(Email);
                 return Ok(roles);
             }
-
             return BadRequest();
         }
-
 
         [HttpPost("[action]")]
         [ValidModel]
         public async Task<IActionResult> SignUp(AppUserAddDto appUserAddDto, [FromServices]IAppUserRoleService appUserRoleService, [FromServices] IAppRoleService appRoleService)
         {
             var appUser = await _appUserService.FindByEmail(appUserAddDto.Email);
-
             if (appUser !=null)
             {
                 return BadRequest($"{appUserAddDto.Email} alınmıştır.");
             }
-
             appUserAddDto.Password = BCrypt.Net.BCrypt.HashPassword(appUserAddDto.Password);
-
             await _appUserService.AddAsync(_mapper.Map<AppUser>(appUserAddDto));
-
             var user = await _appUserService.FindByEmail(appUserAddDto.Email);
             var role = await appRoleService.FindByNameAsync(RoleInfo.Member);
-
             await appUserRoleService.AddAsync(new AppUserRole
             {
                 AppRoleId = role.Id,
                 AppUserId = user.Id
             });
-
             return Created("", appUserAddDto);
         }
 
@@ -94,7 +83,6 @@ namespace SocialWorld.WebApi.Controllers
         {
             var user = await _appUserService.FindByEmail(User.Identity.Name);
             var roles = await _appUserService.GetRolesByEmail(user.Email);
-
             AppUserDto appUserDto = new AppUserDto
             {
                 Id = user.Id,
@@ -102,10 +90,7 @@ namespace SocialWorld.WebApi.Controllers
                 Name = user.Name,
                 Roles = roles.Select(I => I.Name).ToList()
             };
-
             return Ok(appUserDto);
-
-            
         }
     }
 }

@@ -84,7 +84,7 @@ namespace SocialWorld.WebApi.Controllers
             var company = await _companyService.FindByIdAsync(id);
             if (company !=null)
             {
-                company.isActive = false;
+                company.IsActive = false;
                 await _companyService.UpdateAsync(company);
                 return NoContent();
             }

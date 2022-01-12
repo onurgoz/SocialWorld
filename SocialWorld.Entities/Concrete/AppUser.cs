@@ -12,6 +12,7 @@ namespace SocialWorld.Entities.Concrete
 
         public List<AppUserRole> AppUserRoles { get; set; }
         public List<Company> Companies { get; set; }
+        public List<Job> Jobs { get; set; }
         public List<Applicant> Applicants { get; set; }
     }
 }

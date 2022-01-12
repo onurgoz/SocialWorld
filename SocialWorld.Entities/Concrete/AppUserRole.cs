@@ -11,6 +11,5 @@ namespace SocialWorld.Entities.Concrete
 
         public int AppRoleId { get; set; }
         public AppRole AppRole { get; set; }
-
     }
 }
