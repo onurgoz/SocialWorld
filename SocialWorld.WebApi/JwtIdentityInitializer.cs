@@ -1,4 +1,5 @@
-﻿using SocialWorld.Business.Interfaces;
+﻿using System;
+using SocialWorld.Business.Interfaces;
 using SocialWorld.Business.StringInfo;
 using System.Threading.Tasks;
 
@@ -26,22 +27,25 @@ namespace SocialWorld.WebApi
                 });
             }
 
-            var adminUser = await appUserService.FindByEmail("test@test.com");
+            var adminUser = await appUserService.FindByEmail("admin@test.com");
             if (adminUser == null)
             {
                 string password = BCrypt.Net.BCrypt.HashPassword("1");
 
                 await appUserService.AddAsync(new Entities.Concrete.AppUser
                 {
-                    Name="Admin Test",
+                    FirstName="Admin",
+                    LastName = "Test",
+                    NationalityId = "11111111111",
+                    DateOfBirth = new DateTime(1998,07,10),
                     Password = password,
-                    Email = "test@test.com",
+                    Email = "admin@test.com",
                   
                 });
                 
 
                 var role = await appRoleService.FindByNameAsync(RoleInfo.Admin);
-                var admin = await appUserService.FindByEmail("test@test.com");
+                var admin = await appUserService.FindByEmail("admin@test.com");
 
                 await appUserRoleService.AddAsync(new Entities.Concrete.AppUserRole
                 {

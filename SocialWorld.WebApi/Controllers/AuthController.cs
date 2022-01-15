@@ -87,7 +87,7 @@ namespace SocialWorld.WebApi.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
-                Name = user.Name,
+                Name = user.FirstName,
                 Roles = roles.Select(I => I.Name).ToList()
             };
             return Ok(appUserDto);

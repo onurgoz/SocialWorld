@@ -42,6 +42,22 @@ namespace SocialWorld.WebApi.Controllers
         [HttpGet("[action]/{id}")]
         [Authorize(Roles = "Admin,Member")]
         [ValidModel]
+        public async Task<IActionResult> GetAllJobsByJobTypeId(int id)
+        {
+            return Ok(_mapper.Map< List<JobListDto>>(await _jobService.GetAllJobsByJobTypeId(id)));
+        }
+
+        [HttpGet("[action]/{id}")]
+        [Authorize(Roles = "Admin,Member")]
+        [ValidModel]
+        public async Task<IActionResult> GetAllJobsByExceptThisJobTypeId(int id)
+        {
+            return Ok(_mapper.Map<List<JobListDto>>(await _jobService.GetAllJobsByExceptThisJobTypeId(id)));
+        }
+
+        [HttpGet("[action]/{id}")]
+        [Authorize(Roles = "Admin,Member")]
+        [ValidModel]
         public async Task<IActionResult> GetJobsByCompanyId(int id)
         {
             return Ok(_mapper.Map<List<JobListDto>>(await _jobService.GetAllJobsByCompanyId(id)));

@@ -29,5 +29,11 @@ namespace SocialWorld.Business.Concrete
             return await _genericDal.GetAllByFilter(I => I.IsActive == true && I.JobTypeId == id);
         }
 
+        public async Task<List<Job>> GetAllJobsByExceptThisJobTypeId(int id)
+        {
+            return await _genericDal.GetAllByFilter(I => I.IsActive == true && I.JobTypeId != id);
+        }
+
+
     }
 }

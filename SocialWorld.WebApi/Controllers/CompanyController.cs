@@ -63,6 +63,7 @@ namespace SocialWorld.WebApi.Controllers
                 updatedCompany.Name = companyEditDto.Name;
                 updatedCompany.Address = companyEditDto.Address;
                 updatedCompany.Email = companyEditDto.Email;
+                updatedCompany.TaxNumber = companyEditDto.TaxNumber;
                 updatedCompany.Explanation = companyEditDto.Explanation;
                 updatedCompany.PhoneNumber = companyEditDto.PhoneNumber;
                 updatedCompany.PhotoString = companyEditDto.PhotoString;

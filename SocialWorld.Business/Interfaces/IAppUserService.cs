@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 
 namespace SocialWorld.Business.Interfaces
 {
-    public interface IAppUserService : IGenericService<AppUser>
+    public interface IAppUserService : IGenericService<AppUser> ,IUserIdentificationNumberCheck
     {
         Task<AppUser> FindByEmail(string email);
         Task<List<AppRole>> GetRolesByEmail(string email);

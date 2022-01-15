@@ -55,6 +55,8 @@ namespace SocialWorld.WebApi.Mapping.AutoMapper
             CreateMap<Applicant, AddApplicantDto>();
             CreateMap<AddApplicantDto, Applicant>();
             #endregion
+
+           
         }
     }
 }

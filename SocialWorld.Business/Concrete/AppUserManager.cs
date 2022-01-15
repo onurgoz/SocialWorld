@@ -10,10 +10,12 @@ namespace SocialWorld.Business.Concrete
     {
         private readonly IAppUserDal _appUserDal;
         private readonly IGenericDal<AppUser> _genericDal;
-        public AppUserManager(IAppUserDal appUserDal, IGenericDal<AppUser> genericDal) : base(genericDal)
+        private readonly IUserIdentificationNumberCheck _identificationNumberCheck;
+        public AppUserManager(IAppUserDal appUserDal, IGenericDal<AppUser> genericDal,IUserIdentificationNumberCheck identificationNumberCheck) : base(genericDal)
         {
             _genericDal = genericDal;
             _appUserDal = appUserDal;
+            _identificationNumberCheck = identificationNumberCheck;
         }
 
         public async Task<AppUser> FindByEmail(string email)
@@ -24,6 +26,19 @@ namespace SocialWorld.Business.Concrete
         public async Task<List<AppRole>> GetRolesByEmail(string email)
         {
             return await _appUserDal.GetRolesByEmail(email);
+        }
+
+        
+
+        public async Task<bool> IdentificationNumberCheck(AppUser user)
+        {
+            if (await _identificationNumberCheck.IdentificationNumberCheck(user))
+            {
+                user.IsValid = true;
+                await _appUserDal.UpdateAsync(user);
+            }
+            return await _identificationNumberCheck.IdentificationNumberCheck(user);
+
         }
     }
 }

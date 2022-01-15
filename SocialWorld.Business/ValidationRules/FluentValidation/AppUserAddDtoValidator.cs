@@ -9,7 +9,10 @@ namespace SocialWorld.Business.ValidationRules.FluentValidation
         {
             RuleFor(I => I.Email).NotEmpty().WithMessage("Kullanıcı alanı boş olamaz");
             RuleFor(I => I.Password).NotEmpty().WithMessage("Şifre alanı boş olamaz");
-            RuleFor(I => I.Name).NotEmpty().WithMessage("İsim alanı boş olamaz");
+            RuleFor(I => I.FirstName).NotEmpty().WithMessage("İsim alanı boş olamaz");
+            RuleFor(I => I.LastName).NotEmpty().WithMessage("Soy isim alanı boş olamaz");
+            RuleFor(I => I.NationalityId).NotEmpty().WithMessage("İsim alanı boş olamaz");
+            RuleFor(I => I.DateOfBirth).NotEmpty().WithMessage("İsim alanı boş olamaz");
 
         }
     }

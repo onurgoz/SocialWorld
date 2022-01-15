@@ -1,5 +1,6 @@
 ﻿using FluentValidation;
 using Microsoft.Extensions.DependencyInjection;
+using SocialWorld.Business.Adapters;
 using SocialWorld.Business.Concrete;
 using SocialWorld.Business.DTOs.AppUserDtos;
 using SocialWorld.Business.DTOs.CompanyDtos;
@@ -40,7 +41,9 @@ namespace SocialWorld.Business.Containers.MicrosoftIoC
             services.AddScoped<IJobTypeDal, EfJobTypeRepository>();
             services.AddScoped<IJobTypeService, JobTypeManager>();
 
-
+            services.AddScoped<IUserIdentificationNumberCheck, AppUserManager>();
+            services.AddScoped<IUserIdentificationNumberCheck, MernisServiceAdapter>();
+            
 
             services.AddScoped<IJwtService, JwtManager>();
 
