@@ -43,6 +43,27 @@ namespace SocialWorld.WebApi.Controllers
             }
         }
 
+        [HttpGet("[action]/{userId}")]
+        [Authorize(Roles = "Admin,Member")]
+        public async Task<IActionResult> GetUserDetails(int userId)
+        {
+            var user = await _appUserService.FindByIdAsync(userId);
+            if (user != null)
+            {
+                AppUserDto userDto = new AppUserDto()
+                {
+                    DateOfBirth = user.DateOfBirth,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    Email = user.Email,
+                    NationalityId = user.NationalityId,
+                    Password = user.Password
+                };
+                return Ok(userDto);
+            }
+            return BadRequest("Kullanıcı Mevcut Değil");
+        }
+
         [HttpGet("[action]")]
         [ValidModel]
         public async Task<IActionResult> GetRoles(string Email)
@@ -87,8 +108,9 @@ namespace SocialWorld.WebApi.Controllers
             {
                 Id = user.Id,
                 Email = user.Email,
-                Name = user.FirstName,
-                Roles = roles.Select(I => I.Name).ToList()
+                FirstName = user.FirstName,
+                LastName = user.LastName,
+               
             };
             return Ok(appUserDto);
         }
