@@ -18,6 +18,7 @@ namespace SocialWorld.DataAccess.Concrete.EntityFrameworkCore.Context
             modelBuilder.ApplyConfiguration(new AppUserMap());
             modelBuilder.ApplyConfiguration(new AppUserRoleMap());
             modelBuilder.ApplyConfiguration(new CompanyMap());
+            modelBuilder.ApplyConfiguration(new CompanyTypeMap());
             modelBuilder.ApplyConfiguration(new JobMap());
             modelBuilder.ApplyConfiguration(new JobTypeMap());
         }
@@ -27,6 +28,7 @@ namespace SocialWorld.DataAccess.Concrete.EntityFrameworkCore.Context
         public DbSet<AppUser> AppUsers { get; set; }
         public DbSet<AppUserRole> AppUserRoles { get; set; }
         public DbSet<Company> Companies { get; set; }
+        public DbSet<CompanyType> CompanyTypes { get; set; }
         public DbSet<Job> Jobs { get; set; }
         public DbSet<JobType> JobTypes { get; set; }
     }

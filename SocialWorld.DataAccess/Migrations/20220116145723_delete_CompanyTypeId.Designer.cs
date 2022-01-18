@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialWorld.DataAccess.Concrete.EntityFrameworkCore.Context;
 
 namespace SocialWorld.DataAccess.Migrations
 {
     [DbContext(typeof(SocialWorldDbContext))]
-    partial class SocialWorldDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220116145723_delete_CompanyTypeId")]
+    partial class delete_CompanyTypeId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -149,9 +151,6 @@ namespace SocialWorld.DataAccess.Migrations
                     b.Property<int>("AppUserId")
                         .HasColumnType("int");
 
-                    b.Property<int>("CompanyTypeId")
-                        .HasColumnType("int");
-
                     b.Property<string>("Email")
                         .IsRequired()
                         .HasMaxLength(100)
@@ -185,8 +184,6 @@ namespace SocialWorld.DataAccess.Migrations
                     b.HasKey("Id");
 
                     b.HasIndex("AppUserId");
-
-                    b.HasIndex("CompanyTypeId");
 
                     b.ToTable("Companies");
                 });
@@ -316,15 +313,7 @@ namespace SocialWorld.DataAccess.Migrations
                         .HasForeignKey("AppUserId")
                         .IsRequired();
 
-                    b.HasOne("SocialWorld.Entities.Concrete.CompanyType", "CompanyType")
-                        .WithMany("Companies")
-                        .HasForeignKey("CompanyTypeId")
-                        .OnDelete(DeleteBehavior.NoAction)
-                        .IsRequired();
-
                     b.Navigation("AppUser");
-
-                    b.Navigation("CompanyType");
                 });
 
             modelBuilder.Entity("SocialWorld.Entities.Concrete.Job", b =>
@@ -372,11 +361,6 @@ namespace SocialWorld.DataAccess.Migrations
             modelBuilder.Entity("SocialWorld.Entities.Concrete.Company", b =>
                 {
                     b.Navigation("Jobs");
-                });
-
-            modelBuilder.Entity("SocialWorld.Entities.Concrete.CompanyType", b =>
-                {
-                    b.Navigation("Companies");
                 });
 
             modelBuilder.Entity("SocialWorld.Entities.Concrete.Job", b =>

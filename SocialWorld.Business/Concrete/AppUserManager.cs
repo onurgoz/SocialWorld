@@ -27,18 +27,16 @@ namespace SocialWorld.Business.Concrete
         {
             return await _appUserDal.GetRolesByEmail(email);
         }
-
         
-
         public async Task<bool> IdentificationNumberCheck(AppUser user)
         {
             if (await _identificationNumberCheck.IdentificationNumberCheck(user))
             {
                 user.IsValid = true;
                 await _appUserDal.UpdateAsync(user);
+                return true;
             }
-            return await _identificationNumberCheck.IdentificationNumberCheck(user);
-
+            return false;
         }
     }
 }

@@ -26,7 +26,14 @@ namespace SocialWorld.WebApi.Controllers
         [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> GetCompanies(int id)
         {
-            return Ok(_mapper.Map<List<CompanyEditDto>>(await _companyService.GetByAppUserIdAsync(id)));
+            return Ok(_mapper.Map<List<CompanyEditDto>>(await _companyService.GetByAppUserIdAsync(id)).FindAll(x=>x.CompanyTypeId==2 | x.CompanyTypeId==1));
+        }
+
+        [HttpGet("[action]/{id}")]
+        [Authorize(Roles = "Admin,Member")]
+        public async Task<IActionResult> GetCity(int id)
+        {
+            return Ok(_mapper.Map<List<CompanyEditDto>>(await _companyService.GetByAppUserIdAsync(id)).FindAll(x => x.CompanyTypeId == 3 ));
         }
 
         [HttpGet("{id}")]
@@ -91,5 +98,22 @@ namespace SocialWorld.WebApi.Controllers
             }
             return BadRequest("Id doğru değil");
         }
+
+        [HttpGet("[action]/{id}")]
+        [Authorize(Roles = "Admin,Member")]
+        [ValidModel]
+        public async Task<IActionResult> GetAllCompanyByCompanyTypeId(int id)
+        {
+            return Ok(_mapper.Map<List<CompanyEditDto>>(await _companyService.GetAllCompanyByCompanyTypeId(id)));
+        }
+
+        [HttpGet("[action]/{id}")]
+        [Authorize(Roles = "Admin,Member")]
+        [ValidModel]
+        public async Task<IActionResult> GetAllCompanyByExceptThisCompanyTypeId(int id)
+        {
+            return Ok(_mapper.Map<List<CompanyEditDto>>(await _companyService.GetAllCompanyByExceptThisCompanyTypeId(id)));
+        }
+
     }
 }

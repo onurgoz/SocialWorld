@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-
+using MernisVerification;
 using SocialWorld.Business.Interfaces;
 using SocialWorld.Entities.Concrete;
 
@@ -13,13 +13,10 @@ namespace SocialWorld.Business.Adapters
     {
         public async Task<bool> IdentificationNumberCheck(AppUser user)
         {
-            
 
-            //KPSPublicSoapClient client = new KPSPublicSoapClient(KPSPublicSoapClient.EndpointConfiguration.KPSPublicSoap);
-            //return client.TCKimlikNoDogrulaAsync(
-            //    new TCKimlikNoDogrulaRequest(
-            //        new TCKimlikNoDogrulaRequestBody(TCKimlikNo: Convert.ToInt64(user.NationalityId), Ad: user.FirstName.ToUpper(),Soyad: user.LastName.ToUpper(),DogumYili: user.DateOfBirth.Year))).Result.Body.TCKimlikNoDogrulaResult;
-            return true;
+            KPSPublicSoapClient client = new(KPSPublicSoapClient.EndpointConfiguration.KPSPublicSoap12);
+            var result = await client.TCKimlikNoDogrulaAsync(Convert.ToInt64(user.NationalityId), user.FirstName.ToUpper(), user.LastName.ToUpper(), user.DateOfBirth.Year);
+            return result.Body.TCKimlikNoDogrulaResult;
         }
     }
 }

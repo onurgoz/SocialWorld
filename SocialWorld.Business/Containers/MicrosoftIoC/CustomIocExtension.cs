@@ -1,4 +1,5 @@
 ﻿using FluentValidation;
+using MernisVerification;
 using Microsoft.Extensions.DependencyInjection;
 using SocialWorld.Business.Adapters;
 using SocialWorld.Business.Concrete;
@@ -43,7 +44,6 @@ namespace SocialWorld.Business.Containers.MicrosoftIoC
 
             services.AddScoped<IUserIdentificationNumberCheck, AppUserManager>();
             services.AddScoped<IUserIdentificationNumberCheck, MernisServiceAdapter>();
-            
 
             services.AddScoped<IJwtService, JwtManager>();
 
@@ -53,6 +53,8 @@ namespace SocialWorld.Business.Containers.MicrosoftIoC
             services.AddTransient<IValidator<CompanyEditDto>, CompanyEditDtoValidator>();
             services.AddTransient<IValidator<JobAddDto>, JobAddDtoValidator>();
             services.AddTransient<IValidator<JobEditDto>, JobEditDtoValidator>();
+
+            
         }
     }
 }

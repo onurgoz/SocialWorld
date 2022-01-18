@@ -18,6 +18,8 @@ namespace SocialWorld.WebApi.Mapping.AutoMapper
 
             CreateMap<AppUserAddDto, AppUser>();
             CreateMap<AppUser, AppUserAddDto>();
+            CreateMap<AppUserDto, AppUser>();
+            CreateMap<AppUser, AppUserDto>();
             #endregion
 
             #region Company

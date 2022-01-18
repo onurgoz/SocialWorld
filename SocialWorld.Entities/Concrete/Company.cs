@@ -17,5 +17,7 @@ namespace SocialWorld.Entities.Concrete
         public int AppUserId { get; set; }
         public AppUser AppUser { get; set; }
         public List<Job> Jobs { get; set; }
+        public int CompanyTypeId { get; set; }
+        public CompanyType CompanyType { get; set; }
     }
 }
