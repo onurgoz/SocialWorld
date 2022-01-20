@@ -46,7 +46,7 @@ namespace SocialWorld.WebApi.Controllers
         [HttpPost]
         [Authorize(Roles = "Admin,Member")]
         [ValidModel]
-        public async Task<IActionResult> AddCompany(CompanyAddDto companyAddDto)
+        public async Task<IActionResult> AddCompany(CompanyAddDto companyAddDto) //use separate control to add municipality there is open here.
         {
             await _companyService.AddAsync(_mapper.Map<Company>(companyAddDto));
             return Created("", companyAddDto);

@@ -29,6 +29,13 @@ namespace SocialWorld.WebApi.Controllers
             return Ok(_mapper.Map<List<ApplicantListDto>>(await _applicantService.GetAllApplicantsByJobId(id)));
         }
 
+        [HttpGet("[action]")]
+        [Authorize(Roles = "Admin,Member")]
+        public async Task<IActionResult> GetAllApplicants()
+        {
+            return Ok(_mapper.Map<List<ApplicantListDto>>(await _applicantService.GetAllAsync()));
+        }
+
         [HttpPost]
         [Authorize(Roles = "Admin,Member")]
         [ValidModel]
