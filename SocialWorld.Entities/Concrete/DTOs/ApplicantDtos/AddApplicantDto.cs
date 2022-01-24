@@ -1,11 +1,9 @@
-﻿using System;
+﻿using SocialWorld.Entities.Abstract;
 
 namespace SocialWorld.Business.DTOs.ApplicantDtos
 {
-    public class ApplicantListDto
+    public class AddApplicantDto:IDto
     {
-        public int Id { get; set; }
-        public DateTime ApplicationDate { get; set; }
         public int UserId { get; set; }
         public int JobId { get; set; }
     }

@@ -1,6 +1,8 @@
-﻿namespace SocialWorld.Business.DTOs.JobDtos
+﻿using SocialWorld.Entities.Abstract;
+
+namespace SocialWorld.Business.DTOs.JobDtos
 {
-    public class JobAddDto
+    public class JobAddDto : IDto
     {
         public string Name { get; set; }
         public string Explanation { get; set; }

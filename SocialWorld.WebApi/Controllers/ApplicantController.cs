@@ -8,6 +8,7 @@ using SocialWorld.WebApi.CustomFilters;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
+
 namespace SocialWorld.WebApi.Controllers
 {
     [Route("api/[controller]")]
@@ -26,14 +27,14 @@ namespace SocialWorld.WebApi.Controllers
         [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> GetAllApplicantsByJobId(int id)
         {
-            return Ok(_mapper.Map<List<ApplicantListDto>>(await _applicantService.GetAllApplicantsByJobId(id)));
+            return Ok(_mapper.Map<List<Applicant>>(await _applicantService.GetAllApplicantsByJobId(id)));
         }
 
         [HttpGet("[action]")]
         [Authorize(Roles = "Admin,Member")]
         public async Task<IActionResult> GetAllApplicants()
         {
-            return Ok(_mapper.Map<List<ApplicantListDto>>(await _applicantService.GetAllAsync()));
+            return Ok(_mapper.Map<List<Applicant>>(await _applicantService.GetAllAsync()));
         }
 
         [HttpPost]
@@ -53,7 +54,16 @@ namespace SocialWorld.WebApi.Controllers
         [ValidModel]
         public async Task<IActionResult> GetUserApplicants(int id)
         {
-            return Ok(_mapper.Map<List<ApplicantListDto>>(await _applicantService.GetUserApplications(id)));
+            return Ok(_mapper.Map<List<Applicant>>(await _applicantService.GetUserApplications(id)));
         }
+
+        [HttpGet("[action]")]
+        [Authorize(Roles = "Admin,Member")]
+        [ValidModel]
+        public async Task<IActionResult> GetAllApplicantDto()
+        {
+            return Ok(await _applicantService.GetAllApplicantDto());
+        }
+        
     }
 }

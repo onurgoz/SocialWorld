@@ -34,12 +34,25 @@ namespace SocialWorld.WebApi.Controllers
 
             if (updatedUser != null)
             {
-                updatedUser.FirstName = appUserDto.FirstName;
-                updatedUser.LastName = appUserDto.LastName;
-                updatedUser.Email = appUserDto.Email;
-                updatedUser.NationalityId= appUserDto.NationalityId;
-                updatedUser.DateOfBirth= appUserDto.DateOfBirth;
-                
+                if (updatedUser.FirstName == appUserDto.FirstName && updatedUser.LastName == appUserDto.LastName &&
+                    updatedUser.NationalityId == appUserDto.NationalityId &&
+                    updatedUser.DateOfBirth == appUserDto.DateOfBirth)
+                {
+                    updatedUser.Email = appUserDto.Email;
+                    updatedUser.PhoneNumber = appUserDto.PhoneNumber;
+                    updatedUser.PhotoString = appUserDto.PhotoString;
+                }
+                else
+                {
+                    updatedUser.FirstName = appUserDto.FirstName;
+                    updatedUser.LastName = appUserDto.LastName;
+                    updatedUser.Email = appUserDto.Email;
+                    updatedUser.PhoneNumber = appUserDto.PhoneNumber;
+                    updatedUser.PhotoString = appUserDto.PhotoString;
+                    updatedUser.NationalityId = appUserDto.NationalityId;
+                    updatedUser.DateOfBirth = appUserDto.DateOfBirth;
+                    updatedUser.IsValid = false;
+                }
 
                 await _appUserService.UpdateAsync(updatedUser);
                 return NoContent();
@@ -64,6 +77,8 @@ namespace SocialWorld.WebApi.Controllers
                     FirstName = user.FirstName,
                     LastName = user.LastName,
                     Email = user.Email,
+                    PhoneNumber = user.PhoneNumber,
+                    PhotoString = user.PhotoString,
                     NationalityId = user.NationalityId,
                     Password = user.Password
                 };
@@ -78,7 +93,7 @@ namespace SocialWorld.WebApi.Controllers
         {
             var user = await _appUserService.FindByIdAsync(userId);
             var validation = _appUserService.IdentificationNumberCheck(user);
-            if (user != null&&validation.Result)
+            if (user != null && validation.Result)
             {
                 user.IsValid = true;
                 return Ok("Kimliğiniz Onaylandı.");

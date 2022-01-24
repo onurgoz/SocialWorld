@@ -89,6 +89,9 @@ namespace SocialWorld.WebApi.Controllers
                 Email = user.Email,
                 FirstName = user.FirstName,
                 LastName = user.LastName,
+                PhoneNumber = user.PhoneNumber,
+                PhotoString = user.PhotoString,
+                IsValid = user.IsValid
             };
             return Ok(appUserDto);
         }

@@ -5,6 +5,7 @@ using SocialWorld.Business.DTOs.CompanyDtos;
 using SocialWorld.Business.DTOs.JobDtos;
 using SocialWorld.Business.DTOs.JobTypeDtos;
 using SocialWorld.Entities.Concrete;
+using ApplicantListDto = SocialWorld.Business.DTOs.ApplicantDtos.ApplicantListDto;
 
 namespace SocialWorld.WebApi.Mapping.AutoMapper
 {

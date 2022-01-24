@@ -4,10 +4,9 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SocialWorld.Business.DTOs.CompanyTypeDtos
+namespace SocialWorld.Entities.Abstract
 {
-    public class AddCompanyTypeDto
+    public interface IDto
     {
-        public string Name { get; set; }
     }
 }

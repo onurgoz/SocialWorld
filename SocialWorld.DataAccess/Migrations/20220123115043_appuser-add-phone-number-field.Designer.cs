@@ -3,15 +3,17 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SocialWorld.DataAccess.Concrete.EntityFrameworkCore.Context;
 
 namespace SocialWorld.DataAccess.Migrations
 {
     [DbContext(typeof(SocialWorldDbContext))]
-    partial class SocialWorldDbContextModelSnapshot : ModelSnapshot
+    [Migration("20220123115043_appuser-add-phone-number-field")]
+    partial class appuseraddphonenumberfield
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -78,12 +80,6 @@ namespace SocialWorld.DataAccess.Migrations
                         .HasColumnType("nvarchar(100)");
 
                     b.Property<string>("PhoneNumber")
-                        .IsRequired()
-                        .HasMaxLength(100)
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("PhotoString")
-                        .HasMaxLength(2147483647)
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");

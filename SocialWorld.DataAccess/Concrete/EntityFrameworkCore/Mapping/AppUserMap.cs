@@ -14,6 +14,8 @@ namespace SocialWorld.DataAccess.Concrete.EntityFrameworkCore.Mapping
             builder.Property(I => I.Email).HasMaxLength(100).IsRequired();
             builder.Property(I => I.FirstName).HasMaxLength(100).IsRequired();
             builder.Property(I => I.LastName).HasMaxLength(100).IsRequired();
+            builder.Property(I => I.PhoneNumber).HasMaxLength(100).IsRequired();
+            builder.Property(x => x.PhotoString).HasMaxLength(int.MaxValue);
             builder.Property(I => I.NationalityId).HasMaxLength(11).IsRequired();
             builder.HasIndex(I => I.Email).IsUnique();
             builder.HasMany(I => I.AppUserRoles).WithOne(I => I.AppUser).HasForeignKey(I => I.AppUserId).OnDelete(DeleteBehavior.NoAction);
