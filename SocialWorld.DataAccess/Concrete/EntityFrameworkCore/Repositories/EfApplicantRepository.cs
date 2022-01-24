@@ -22,7 +22,7 @@ namespace SocialWorld.DataAccess.Concrete.EntityFrameworkCore.Repositories
                          select new ApplicantListDto()
                          {
                              Id = applicant.Id,
-                             Firstname = AppUser.FirstName,
+                             FirstName = AppUser.FirstName,
                              LastName = AppUser.LastName,
                              ApplicationDate = applicant.ApplicationDate,
                              Email = AppUser.Email,
